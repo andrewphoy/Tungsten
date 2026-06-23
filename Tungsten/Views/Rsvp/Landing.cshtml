@@ -1,0 +1,20 @@
+﻿@{
+}
+
+<div id="narrow-container" class="rsvp">
+    <h2>RSVP for Haley &amp; Andrew's Wedding</h2>
+    <p class="text-center">Enter your first and last name to find your invitation. You'll be able to RSVP for your entire group.</p>
+    <div class="mb-4">
+        <form action="/rsvp" method="post">
+            <label for="guestName" class="form-label">
+                Name
+            </label>
+            <input type="text" class="form-control" id="guestName" name="guestName" autocomplete="name" placeholder="Full name" required="">
+            <div class="text-center">
+                <button type="submit" class="btn btn-rsvp btn-lg px-5">
+                    Find your invitation
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

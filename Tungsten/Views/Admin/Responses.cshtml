@@ -1,0 +1,59 @@
+﻿@model List<Guest>
+@{
+    ViewData["Title"] = "RSVP Responses";
+    ViewData["FullScreen"] = true;
+    RsvpSummary summary = (RsvpSummary)ViewData["Summary"]!;
+
+    TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+    Func<DateTime?, string> ToFriendlyTime = (DateTime? dt) => {
+        if (!dt.HasValue) { return ""; }
+        DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(dt.Value, easternZone);
+        return easternTime.ToString("MMM d HH:mm");
+    };
+}
+
+<div id="summary" class="container">
+    <dl class="row">
+        <dt class="col-sm-3">Attending</dt>
+        <dd class="col-sm-9">@summary.Attending</dd>
+        <dt class="col-sm-3">Declined</dt>
+        <dd class="col-sm-9">@summary.Declined</dd>
+        <dt class="col-sm-3">Meals</dt>
+        <dd class="col-sm-9">
+            <dl class="row">
+                <dt class="col-sm-4">Prime Rib</dt>
+                <dd class="col-sm-8">@summary.Meals["beef"]</dd>
+                <dt class="col-sm-4">Salmon</dt>
+                <dd class="col-sm-8">@summary.Meals["fish"]</dd>
+                <dt class="col-sm-4">Vegetarian</dt>
+                <dd class="col-sm-8">@summary.Meals["veg"]</dd>
+                <dt class="col-sm-4">Kids Meal</dt>
+                <dd class="col-sm-8">@summary.Meals["kids"]</dd>
+                <dt class="col-sm-4">(blank)</dt>
+                <dd class="col-sm-8">@summary.Meals[""]</dd>
+            </dl>
+        </dd>
+    </dl>
+</div>
+<table class="table">
+    <thead>
+    </thead>
+    <tbody>
+        @foreach (var guest in Model) {
+            <tr>
+                <td class="text-nowrap">@guest.FirstName @guest.LastName</td>
+                <td>@(guest.IsAttending!.Value ? "Attend" : "Decline")</td>
+                <td>@guest.MealChoice</td>
+                <td>
+                    @(guest.IsVegan.HasValue && guest.IsVegan.Value ? "Vegan" : "")
+                    @(guest.IsGlutenFree.HasValue && guest.IsGlutenFree.Value ? "Gluten Free" : "")
+                    @(guest.IsKosher.HasValue && guest.IsKosher.Value ? "Kosher" : "")
+                </td>
+                <td>@guest.MealComments</td>
+                <td>@guest.Comments</td>
+                <td>@guest.SongRequest</td>
+                <td class="text-nowrap">@ToFriendlyTime(guest.RsvpResponseDate)</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Things to Do";
+}
+
+<div class="row">
+    <div class="col">
+        <p><strong>There's a number of options for the Boston area over the weekend!</strong></p>
+
+        <p>
+            @Html.Hyperlink("The Red Sox have a home game series", "https://www.mlb.com/redsox/tickets/single-game-tickets").
+            We'd advise against the August 22nd game.
+        </p>
+        <p>
+            If the weather is nice, take a walk around the Boston Common, 
+            ride a @Html.Hyperlink("swan boat", "https://swanboats.com/")
+            or @Html.Hyperlink("the carousel", "https://bostonfrogpond.com/frog-pond-carousel/"),
+            or splash in Frog Pond.
+            You can also check out the Esplanade or the Arnold Arboretum (where we had our first date!).
+        </p>
+        <p>
+            For indoor activities, our favorite museums in the area are the 
+            @Html.Hyperlink("Museum of Science", "https://www.mos.org/") or the
+            @Html.Hyperlink("Museum of Fine Arts", "https://www.mfa.org/").
+        </p>
+        <p>
+            Our favorite restaurants in the area include 
+            @Html.Hyperlink("Antico Forno", "https://www.anticofornoboston.com/"),
+            @Html.Hyperlink("Pho Pasteur", "https://phopasteurboston.net/"),
+            @Html.Hyperlink("Hot Pot Buffet", "https://hot-pot-buffet.placejoys.com/"),
+            and @Html.Hyperlink("Dumpling Palace", "https://www.dumpling-palace.com/").
+            For drinks, Boston has several brewery experience options including the 
+            @Html.Hyperlink("Sam Adams Brewery", "https://www.samadamsbostonbrewery.com/") or the
+            @Html.Hyperlink("Downeast Cider House", "https://downeastcider.com/").
+        </p>
+    </div>
+
+</div>

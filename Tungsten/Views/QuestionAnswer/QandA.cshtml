@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Question>
+@{
+    ViewData["Title"] = "The answers to all your questions";
+}
+
+<div class="qanda row text-center">
+    @foreach (var question in Model) {
+        <div class="col-12 question">
+            @question.Title
+        </div>
+        <div class="col-12 text-start">
+            @question.Body
+        </div>
+    }
+</div>

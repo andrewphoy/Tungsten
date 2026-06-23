@@ -1,0 +1,100 @@
+﻿@model Tuple<Guest, List<Guest>?>
+@{
+    Guest guest = Model.Item1;
+    List<Guest> family = Model.Item2 ?? new List<Guest>();
+    int i = 1;
+}
+
+<div class="rsvp" style="max-width: 500px; margin: 0 auto;">
+    <h3>Wedding at City Winery</h3>
+    <p>Let us know who's coming with you!  Kids and guests are welcome!</p>
+
+    <form method="post" action="/rsvp/wedding">
+        <div id="guest-list">
+            <div class="guest pb-3">
+                <div class="d-flex justify-content-between">
+                    <div class="guest-name">
+                        @guest.FirstName @guest.LastName
+                        @* <span><a href="#">Edit</a></span> *@
+                    </div>
+                    <div class="btn-group guest-rsvp" role="group">
+                        <input type="radio" class="btn-check" name="btn-attend-1" id="btn-attend-1-yes" autocomplete="off" value="yes" @guest.IsAttending.CheckboxChecked(true) />
+                        <label class="btn btn-outline-primary" for="btn-attend-1-yes">Accept</label>
+
+                        <input type="radio" class="btn-check" name="btn-attend-1" id="btn-attend-1-no" autocomplete="off" value="no" @guest.IsAttending.CheckboxChecked(false) />
+                        <label class="btn btn-outline-primary" for="btn-attend-1-no">Decline</label>
+                    </div>
+                </div>
+                <input type="hidden" name="guest-name-1" value="@guest.FirstName @guest.LastName"/>
+            </div>
+            @foreach (var g in family) {
+                i++;
+                <div class="guest pb-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="guest-name">
+                            @g.FirstName @g.LastName
+                            @* <span><a href="#">Edit</a></span> *@
+                        </div>
+                        <div class="btn-group guest-rsvp" role="group">
+                            <input type="radio" class="btn-check" name="btn-attend-@i" id="btn-attend-@i-yes" autocomplete="off" value="yes" @g.IsAttending.CheckboxChecked(true) />
+                            <label class="btn btn-outline-primary" for="btn-attend-@i-yes">Accept</label>
+
+                            <input type="radio" class="btn-check" name="btn-attend-@i" id="btn-attend-@i-no" autocomplete="off" value="no" @g.IsAttending.CheckboxChecked(false) />
+                            <label class="btn btn-outline-primary" for="btn-attend-@i-no">Decline</label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="guest-name-@i" value="@g.FirstName @g.LastName" />
+                </div>
+            }
+
+        </div>
+
+        <div id="new-guest-block" class="mb-4 container d-none">
+            <div class="row">
+            <div class="col-9">
+            <input type="text"
+                   class="form-control"
+                   id="new-guest"
+                   placeholder="Name"
+                   value="" />
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary" type="button" id="save-new-guest">Save</button>
+            </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-outline-primary" id="add-guest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 6px; vertical-align: -2px;">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
+            Add guest
+        </button>
+
+        
+        <div class="text-center">
+            <button type="submit" class="btn btn-rsvp btn-lg px-5">
+                Continue
+            </button>
+        </div>
+    </form>
+</div>
+
+<template id="tmpl-new-guest">
+    <div class="guest pb-3">
+        <div class="d-flex justify-content-between">
+            <div class="guest-name">
+                {{name}}
+                @* <span><a href="#">Edit</a></span> *@
+            </div>
+            <div class="btn-group guest-rsvp" role="group">
+                <input type="radio" class="btn-check" name="btn-attend-{{i}}" id="btn-attend-{{i}}-yes" autocomplete="off" value="yes" />
+                <label class="btn btn-outline-primary" for="btn-attend-{{i}}-yes">Accept</label>
+
+                <input type="radio" class="btn-check" name="btn-attend-{{i}}" id="btn-attend-{{i}}-no" autocomplete="off" value="no" />
+                <label class="btn btn-outline-primary" for="btn-attend-{{i}}-no">Decline</label>
+            </div>
+        </div>
+        <input type="hidden" name="guest-name-{{i}}" value="{{name}}" />
+    </div>
+</template>

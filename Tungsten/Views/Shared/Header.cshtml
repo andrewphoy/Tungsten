@@ -1,0 +1,30 @@
+﻿<header>
+    <div class="header-bar">
+        <div class="container">
+            <div class="row" style="background-color: #732b47">
+                <div class="col-12 col-lg-4 text-center">
+                    <img id="pigeon-logo" style="max-width: 100%" src="/img/pigeons-transparent.png" />
+                </div>
+                <div class="col-12 col-lg-8 m-auto">
+                    <div class="row title-block pt-3" style="color: white!important">
+                        <h1 class="site-title">Haley &amp; Andrew</h1>
+                        <div class="date-location">
+                            <h2>August 22, 2026 &bull; Boston, MA</h2>
+                            <h2>@Current.DaysToGoString</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav justify-content-center">
+        @Html.NavLink("Home", "/")
+        @Html.NavLink("Our Story", "/our-story")
+        @Html.NavLink("Wedding Party", "/wedding-party")
+        @Html.NavLink("Q + A", "/q-and-a")
+        @Html.NavLink("Travel", "/travel")
+        @Html.NavLink("Things to Do", "/things-to-do")
+        @Html.NavLink("Registry", "/registry")
+    </ul>
+</header>

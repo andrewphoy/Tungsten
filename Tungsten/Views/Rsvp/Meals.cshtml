@@ -1,0 +1,155 @@
+﻿@model Tuple<Guest, List<Guest>?>
+@{
+    Guest guest = Model.Item1;
+    List<Guest> family = Model.Item2 ?? new List<Guest>();
+    int i = 1;
+}
+
+<div class="rsvp" style="max-width: 650px; margin: 0 auto;">
+    <form method="post" action="/rsvp/meals">
+        <h3>Meal Choice</h3>
+        <ul>
+            <li>
+                <strong>Braised Beef Short Ribs</strong>
+                Served with hoisin-bourbon jus, cauliflower puree, and grilled asparagus
+            </li>
+            <li>
+                <strong>Seared Salmon</strong>
+                Served with charred lemon, beurre blanc, and broccolini
+            </li>
+            <li>
+                <strong>Vegetarian Option</strong>
+                Chef's choice
+            </li>
+            <li>
+                <strong>Chicken Tenders</strong>
+                Kids meal
+            </li>
+        </ul>
+
+        @if (guest.IsAttending.HasValue && guest.IsAttending.Value) {
+            <div class="guest pb-3">
+                <div class="d-flex justify-content-between">
+                    <div class="guest-name">
+                        @guest.FirstName @guest.LastName
+                    </div>
+                    <div class="btn-group guest-rsvp d-flex flex-column" role="group">
+                        <div>
+                            <input type="radio" class="btn-check" name="btn-meal-1" id="btn-meal-1-beef" autocomplete="off" value="beef" @guest.MealChoice.CheckboxChecked("beef") />
+                            <label class="btn btn-outline-primary" for="btn-meal-1-beef">Beef Short Rib</label>
+
+                            <input type="radio" class="btn-check" name="btn-meal-1" id="btn-meal-1-fish" autocomplete="off" value="fish" @guest.MealChoice.CheckboxChecked("fish") />
+                            <label class="btn btn-outline-primary" for="btn-meal-1-fish">Salmon</label>
+
+                            <input type="radio" class="btn-check" name="btn-meal-1" id="btn-meal-1-veg" autocomplete="off" value="veg" @guest.MealChoice.CheckboxChecked("veg") />
+                            <label class="btn btn-outline-primary" for="btn-meal-1-veg">Vegetarian</label>
+
+                            <input type="radio" class="btn-check" name="btn-meal-1" id="btn-meal-1-kids" autocomplete="off" value="kids" @guest.MealChoice.CheckboxChecked("kids") />
+                            <label class="btn btn-outline-primary" for="btn-meal-1-kids">Kids Meal</label>
+                        </div>
+                        <div class="align-self-end">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="check-vegan-1" id="check-vegan-1" value="vegan" @guest.IsVegan.CheckboxChecked(true)>
+                                <label class="form-check-label" for="check-vegan-1">Vegan</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="check-gluten-1" id="check-gluten-1" value="gluten" @guest.IsGlutenFree.CheckboxChecked(true)>
+                                <label class="form-check-label" for="check-gluten-1">Gluten Free</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="check-kosher-1" id="check-kosher-1" value="kosher" @guest.IsKosher.CheckboxChecked(true)>
+                                <label class="form-check-label" for="check-kosher-1">Kosher</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <input type="hidden" name="guest-id-1" value="@guest.Id" />
+            </div>
+        }
+
+        @foreach (var g in family) {
+            i++;
+            if (g.IsAttending.HasValue && g.IsAttending.Value) {
+                <div class="guest pb-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="guest-name">
+                            @g.FirstName @g.LastName
+                        </div>
+                        <div class="btn-group guest-rsvp d-flex flex-column" role="group">
+                            <div>
+                                <input type="radio" class="btn-check" name="btn-meal-@i" id="btn-meal-@i-beef" autocomplete="off" value="beef" @g.MealChoice.CheckboxChecked("beef") />
+                                <label class="btn btn-outline-primary" for="btn-meal-@i-beef">Beef Short Rib</label>
+
+                                <input type="radio" class="btn-check" name="btn-meal-@i" id="btn-meal-@i-fish" autocomplete="off" value="fish" @g.MealChoice.CheckboxChecked("fish") />
+                                <label class="btn btn-outline-primary" for="btn-meal-@i-fish">Salmon</label>
+
+                                <input type="radio" class="btn-check" name="btn-meal-@i" id="btn-meal-@i-veg" autocomplete="off" value="veg" @g.MealChoice.CheckboxChecked("veg") />
+                                <label class="btn btn-outline-primary" for="btn-meal-@i-veg">Vegetarian</label>
+
+                                <input type="radio" class="btn-check" name="btn-meal-@i" id="btn-meal-@i-kids" autocomplete="off" value="kids" @g.MealChoice.CheckboxChecked("kids") />
+                                <label class="btn btn-outline-primary" for="btn-meal-@i-kids">Kids Meal</label>
+                            </div>
+                            <div class="align-self-end">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="check-vegan-@i" id="check-vegan-@i" value="vegan" @g.IsVegan.CheckboxChecked(true)>
+                                    <label class="form-check-label" for="check-vegan-@i">Vegan</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="check-gluten-@i" id="check-gluten-@i" value="gluten" @g.IsGlutenFree.CheckboxChecked(true)>
+                                    <label class="form-check-label" for="check-gluten-@i">Gluten Free</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="check-kosher-@i" id="check-kosher-@i" value="kosher" @g.IsKosher.CheckboxChecked(true)>
+                                    <label class="form-check-label" for="check-kosher-@i">Kosher</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="guest-id-@i" value="@g.Id" />
+                </div>
+            }
+        }
+
+        <h3>Other Information</h3>
+        <div class="mb-4">
+            <label for="comments" class="form-label">
+                Comments
+            </label>
+            <textarea class="form-control"
+                      id="comments"
+                      rows="3"
+                      name="mealcomments"
+                      placeholder="Dietary restrictions, allergies, notes, etc.">@guest.MealComments</textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="comments" class="form-label">
+                Note for Haley &amp; Andrew
+            </label>
+            <textarea class="form-control"
+                      id="notes"
+                      rows="3"
+                      name="note"
+                      placeholder="Leave us a note!">@guest.Comments</textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="songRequest" class="form-label">
+                Song Request
+            </label>
+            <input type="text"
+                   class="form-control"
+                   id="songRequest"
+                   name="songrequest"
+                   placeholder="What song will get you on the dance floor?"
+                   value="@guest.SongRequest" />
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-rsvp btn-lg px-5">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "RSVP";
+}
+
+<div class="card rsvp-card">
+
+    <div class="rsvp-header">
+        <h1 class="mb-2">Wedding RSVP</h1>
+        <p class="mb-0">We can’t wait to celebrate with you!</p>
+    </div>
+
+    <div class="card-body p-4">
+
+        <form>
+            <!-- Guest Name -->
+            <div class="mb-4">
+                <label for="guestName" class="form-label">
+                    Guest Name
+                </label>
+                <input type="text"
+                       class="form-control"
+                       id="guestName"
+                       placeholder="Enter your full name"
+                       required />
+            </div>
+
+            <!-- Meal Choice -->
+            <div class="mb-4">
+                <label class="form-label d-block mb-3">
+                    Meal Choice
+                </label>
+
+                <div class="row g-3">
+
+                    <!-- Steak -->
+                    <div class="col-md-4">
+                        <input type="radio"
+                               class="btn-check"
+                               name="mealChoice"
+                               id="steak"
+                               value="Steak"
+                               autocomplete="off"
+                               required />
+
+                        <label class="btn btn-outline-dark w-100 p-4 text-start h-100" for="steak">
+                            <div class="fw-bold fs-5 mb-1">
+                                Braised Beef Short Ribs
+                            </div>
+                            <div class="small text-muted">
+                                cauliflower puree,
+                                grilled asparagus, au poivre
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Salmon -->
+                    <div class="col-md-4">
+                        <input type="radio"
+                               class="btn-check"
+                               name="mealChoice"
+                               id="salmon"
+                               value="Salmon"
+                               autocomplete="off" />
+
+                        <label class="btn btn-outline-dark w-100 p-4 text-start h-100" for="salmon">
+                            <div class="fw-bold fs-5 mb-1">
+                                Seared Salmon
+                            </div>
+                            <div class="small text-muted">
+                                charred lemon,
+                                beurre blanc, broccolini
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Vegetarian -->
+                    <div class="col-md-4">
+                        <input type="radio"
+                               class="btn-check"
+                               name="mealChoice"
+                               id="vegetarian"
+                               value="Vegetarian"
+                               autocomplete="off" />
+
+                        <label class="btn btn-outline-dark w-100 p-4 text-start h-100" for="vegetarian">
+                            <div class="fw-bold fs-5 mb-1">
+                                Vegetarian
+                            </div>
+                            <div class="small text-muted">
+                                Wild mushroom risotto with roasted vegetables
+                            </div>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Comments -->
+            <div class="mb-4">
+                <label for="comments" class="form-label">
+                    Comments
+                </label>
+                <textarea class="form-control"
+                          id="comments"
+                          rows="3"
+                          placeholder="Dietary restrictions, notes, etc."></textarea>
+            </div>
+
+            <!-- Song Request -->
+            <div class="mb-4">
+                <label for="songRequest" class="form-label">
+                    Song Request
+                </label>
+                <input type="text"
+                       class="form-control"
+                       id="songRequest"
+                       placeholder="What song will get you on the dance floor?" />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-rsvp btn-lg text-white px-5">
+                    Submit RSVP
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

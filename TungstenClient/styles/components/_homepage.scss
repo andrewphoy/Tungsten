@@ -1,0 +1,38 @@
+@use '../base/colors' as light;
+
+.banner-date-location div {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    //color: var(--main-color);
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#banner-date {
+    border-right: 1px solid light.$primary-color;
+    padding-right: 3rem;
+}
+
+#banner-location {
+    padding-left: 3rem;
+}
+
+#wedding-agenda {
+    margin-top: 2rem;
+    color: light.$primary-color;
+}
+
+ul.agenda {
+    list-style-type: none;
+    margin-top: 2rem;
+}
+
+    ul.agenda li {
+        padding: 1rem 0;
+        border-bottom: 1px solid light.$primary-color;
+    }
+
+    ul.agenda li:first-of-type {
+        border-top: 1px solid light.$primary-color;
+    }
